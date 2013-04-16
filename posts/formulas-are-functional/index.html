@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+  <title>Work for Pizza</title>
+	<meta name="description" content>
+	<meta name="author" content>
+
+	<!-- Fonts
+  ================================================== -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../../css/skeleton.css">
+	<link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/local.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Atom
+	================================================== -->
+  <link rel="alternate" type="application/atom+xml" href="../../posts.atom" title="Work for Pizza feed">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+
+	<!-- Google Analytics
+	================================================== -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26116441-1']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ </script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+  <div class="container">
+  <div class="ten columns offset-by-three">
+  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <hr />
+</div>
+<div class="ten columns offset-by-three">
+  <h3>Macros are Imperative. Formulas are Functional.</h3>
+  <p>April  8, 2013</p>
+  <p>For years I’ve been preaching the virtues of functional programming to my friends and, well, just about anyone who would listen. They’ve indulged me but needless to say I don’t have many converts. Recently I read a great article titled <a href="http://blog.jcoglan.com/2013/03/30/callbacks-are-imperative-promises-are-functional-nodes-biggest-missed-opportunity/">Callbacks are imperative, promises are functional</a>. It does a good job of bringing a little bit of that functional world to the imperative programmer. In the article the author states that if you’ve used Excel you’ve done functional programming. It was a minor point but I loved the analogy. I’m going to expand it and also state that Excel development can actually be a mix of functional and imperative styles.</p>
+<h4 id="the-imperative-piece">The Imperative Piece</h4>
+<p>Excel has support for macros. An Excel macro is code that runs essentially top to bottom performing a series of operations. You tell the computer what to do, when, in what order. Your code interacts with things outside itself. It may read or set cells values, read or write to a file or database or in some other way change state. Each time you run your code the result may be different. You probably expect it to be. You may be incrementing things, for example, or importing data from an updated file. This is the imperative piece - a series of steps, top to bottom, getting, setting and a potentially or expectedly different result each time.</p>
+<h4 id="the-functional-piece">The Functional Piece</h4>
+<p>Excel’s most basic element is the cell formula. You define a formula within a cell and it gives you a result. A formula usually takes an input, though it’s not required. A formula always produces a result. This is the functional piece. Very much so:</p>
+<ul>
+<li><p>The execution of a formula within one cell is independent from the execution of formulas within other cells. If a cell is not delivering the right output you need only inspect the cell’s formula and verify the value of its input. One cell can’t change how another cell operates or what it delivers as a result. (It’s a simplification but work with me.)</p></li>
+<li><p>Cells that take input don’t care how it was produced. They don’t care if Excel is giving them a literal value of 34 that you typed in with your keyboard or the product of a formula that multiplied 17 by 2.</p></li>
+<li><p>Given one input a formula always returns the same output. If you put the MAX formula in a cell and take cells with the values 1-10 as input you are always going to produce 10 as output. This is so “functional” it’s one of the tenets of functional programming.</p></li>
+<li><p>Developing in Excel you often put a formula into, say, cell A10. Then you go to cell, say, A11 and put in a formula that refers to A10. And so forth and so on. You know that if you got the formula in A10 right all you need to worry about in A11 is A11. You don’t need to worry about what’s happening in some other part of your code base. At the end you chain these small, reliable pieces together to build bigger things. This is function composition!</p></li>
+</ul>
+<p>Functional programming has a lot of advantages. It’s an awful lot of fun and may not be as foreign as you think. So, please, go forth and <a href="http://learnyouahaskell.com/">Learn you a Haskell</a>! It’s awesome.</p>
+  <div id="disqus_thread">
+    <script type="text/javascript">
+      var disqus_shortname = 'workforpizza';
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</div>
+
+  </div>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+  <title>Work for Pizza</title>
+	<meta name="description" content>
+	<meta name="author" content>
+
+	<!-- Fonts
+  ================================================== -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../../css/skeleton.css">
+	<link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/local.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Atom
+	================================================== -->
+  <link rel="alternate" type="application/atom+xml" href="../../posts.atom" title="Work for Pizza feed">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+
+	<!-- Google Analytics
+	================================================== -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26116441-1']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ </script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+  <div class="container">
+  <div class="ten columns offset-by-three">
+  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <hr />
+</div>
+<div class="ten columns offset-by-three">
+  <h3>Comparing Apples and Amazon Web Services</h3>
+  <p>April  4, 2013</p>
+  <p>Many do “how low can you go?” comparisons. So let’s follow in their footsteps and not think about what we’re doing until later. If you’re on Amazon Web Services (AWS) using Elastic Computing Cloud (EC2) then you know their smallest offering is a t1.micro that isn’t suitable for benchmarking. The next smallest offering is an m1.small. That can be had for ~$25-$40/month. Let’s compare the performance of one of those against the $20/month Linode offering and the $5/month Digital Ocean (DO) offering. Running UnixBench we get the following results, averaged, with standard deviation (STDEV), from 4 samples over 50 days.</p>
+<pre><code># CPU (STDEV)
+EC2:     182 (23%)
+Linode: 2242 (20%)
+DO:     1291 ( 0%)
+
+# I/O MB/s (STDEV)
+EC2:     37 (12%)
+Linode:  75 (36%)
+DO:     119 (28%)
+
+# Network MB/s (STDEV)
+EC2:     19 (52%)
+Linode:  90 ( 2%)
+DO:      12 (12%)</code></pre>
+<p>Alright. Let’s not think too much and draw some preliminary conclusions.</p>
+<ul>
+<li>Linode and DO offer an order of magnitude greater CPU.</li>
+<li>DO’s I/O is by far the best (they state the plan is on SSDs).</li>
+<li>Linode’s network is nearly an order of magnitude better than the others.</li>
+</ul>
+<p>Maybe that’s enough for you to make a choice but let’s look at the STDEV between the results and draws some perhaps more meaningful conclusions.</p>
+<ul>
+<li>DO’s CPU is very consistent.</li>
+<li>EC2’s I/O is very consistent.</li>
+<li>Linode’s network is very consistent.</li>
+</ul>
+<p>Sound familiar? “We do X, Y and Z. Pick one.” Well, sadly it’s not that simple either. We’ve measured over time because we worry our VPS neighbors might hurt our performance. Indeed, the numbers vary over time. But not all of our servers have been housed in the same data centers or even geographical regions. If a Linode is in Fremont (ah, Hurricane Electric!) and a DO is in Dallas and an EC2 box is in Virginia or the Northeast or Australia, how does that affect performance? My rambling point is that it’s pretty tough to do a few tests and draw conclusions. Much depends on:</p>
+<ul>
+<li>Where are your customers?</li>
+<li>What’s the nature/technical protocol of your services?</li>
+<li>What are you uptime requirements?</li>
+</ul>
+<p>That’s just skimming the surface. And before even thinking about that let’s look at how the <em>virtual</em> hardware of our servers compares.</p>
+<pre><code># CPU (cores)
+EC2:    1
+Linode: 8
+DO:     1
+
+# RAM (GB)
+EC2:    1.7
+Linode: 1.0
+DO:     0.5
+
+# Disk space (GB)
+EC2:    168
+Linode:  24
+DO:      20</code></pre>
+<p>Wow. “So I get 70-340% more memory and 7 times more storage on EC2?” Yes. “But it looked like EC2 sucked and now it seems it has these other resources where it kicks ass. So how do I decide?” Well, use a few offerings for a while and find out for yourself which is best for your needs. Start here and compare:</p>
+<pre><code>* Need to run personal blog
+  (Depends.) It is database backed like Wordpress?
+      Yes --&gt; More questions
+          --&gt; And so forth and so on
+      No  --&gt; Just host it on GitHub
+          --&gt; Or Amazon S3/Cloudfront (again the choices!)
+* Need to scale up and down hourly like Netflix
+  --&gt; Use EC2</code></pre>
+<h2 id="interruption">Interruption</h2>
+<p>The lady of the house is home, the pizza dough has risen and I have to tend to that.</p>
+<h2 id="more-of-an-ending-than-a-conclusion">More of an Ending than a Conclusion</h2>
+<p>AWS in an ecosystem. EC2 is a service within AWS. Comparing a single EC2 instance to a $5/month or $19/year VPS is comparing apples to oranges. If all you need is compute power from a number of servers then EC2 is going to cost you more. Unless, of course, you spin them up and down when you need them. Then EC2 might be cheaper. If your comparison is based primarily on monthly cost per server you may already be off on the wrong foot in your evaluation.</p>
+<h2 id="update">Update</h2>
+<p>My first deep dish pizza came out better than expected.</p>
+<p><a href="../../images/pizza-1.jpg"><img src="../../images/pizza-1-small.jpg" /></a></p>
+<p><a href="../../images/pizza-2.jpg"><img src="../../images/pizza-2-small.jpg" /></a></p>
+<p>Essentially, I made the dough from <a href="http://www.pizzamaking.com/dkm_chicago.php">here</a>. But I dropped the salt and stuck with olive oil as I didn’t have canola. I don’t have a mixer so I blended the ingredients with a spoon then kneaded by hand for the 7+ minutes. Oh, and I split the dough into two balls and used a 9 inch pan.</p>
+<p>I took the second dough ball out of the fridge a few days later and the pizza came out well. I added eggplant, more spinach and more cheese. Before cooking:</p>
+<p><a href="../../images/pizza-before.jpg"><img src="../../images/pizza-before-small.jpg" /></a></p>
+<p>After cooking:</p>
+<p><a href="../../images/pizza-above.jpg"><img src="../../images/pizza-above-small.jpg" /></a></p>
+<h2 id="update-2">Update 2</h2>
+<p>A few days after this post Linode doubled the RAM in their $20/month plan. That’s now reflected above. I’m making pizza again today and the dough is rising in a smilarly competive fashion:</p>
+<p><a href="../../images/pizza-dough-before.jpg"><img src="../../images/pizza-dough-before-small.jpg" /></a></p>
+<p><a href="../../images/pizza-dough-after.jpg"><img src="../../images/pizza-dough-after-small.jpg" /></a></p>
+  <div id="disqus_thread">
+    <script type="text/javascript">
+      var disqus_shortname = 'workforpizza';
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</div>
+
+  </div>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

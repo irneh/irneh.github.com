@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+  <title>Work for Pizza</title>
+	<meta name="description" content>
+	<meta name="author" content>
+
+	<!-- Fonts
+  ================================================== -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../../css/skeleton.css">
+	<link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/local.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Atom
+	================================================== -->
+  <link rel="alternate" type="application/atom+xml" href="../../posts.atom" title="Work for Pizza feed">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+
+	<!-- Google Analytics
+	================================================== -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26116441-1']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ </script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+  <div class="container">
+  <div class="ten columns offset-by-three">
+  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <hr />
+</div>
+<div class="ten columns offset-by-three">
+  <h3>Scoot Architecture Part 2 - Application Stack</h3>
+  <p>April 16, 2013</p>
+  <p>This is part 2 in a series detailing the systems and application architecture running <a href="http://scoot.io">Scoot</a>. Scoot’s core services are on Amazon Web Services (AWS). This article describes the application stack. This post is one half how we did it and another half how you can do it.</p>
+<h4 id="topology-with-generics">Topology, with Generics</h4>
+<p>Here is a topology that shows functional components without software specifics. Control and data flow should make some level of sense.</p>
+<p><a href="../../images/scoot-stack.png"><img src="../../images/scoot-stack-small.png" /></a></p>
+<h4 id="topology-with-specifics">Topology, with Specifics</h4>
+<p>Here is a diagram that mirrors the previous and adds some software specifics in grey.</p>
+<p><a href="../../images/scoot-stack-specific.png"><img src="../../images/scoot-stack-specific-small.png" /></a></p>
+<p>Let’s do a quick run-through of the components.</p>
+<h4 id="simple-storage-service-s3">Simple Storage Service (S3)</h4>
+<p><a href="http://aws.amazon.com/s3/">S3</a> is Amazon’s scalable storage service. We use it to store photos. A primary benefit of using a storage service is not having to manage disks or grow volumes.</p>
+<h4 id="aws-cloudfront">AWS Cloudfront</h4>
+<p><a href="http://aws.amazon.com/cloudfront/">Cloudfront</a> is Amazon’s Content Delivery Network (CDN). The CDN delivers static resources such as Javascript, CSS and images. Using a CDN your content is likely to get to the browser faster and the load on your web server(s) should be reduced. Our CDN has two origins. One origin is S3, for photos. The other origin is our web server, for everything but photos.</p>
+<h4 id="elastic-load-balancer-elb">Elastic Load Balancer (ELB)</h4>
+<p><a href="http://aws.amazon.com/elasticloadbalancing/">ELB</a> is Amazon’s load balancer. ELB routes requests to the web servers. ELB monitors the health of the web servers and knows how many are available via <a href="http://aws.amazon.com/autoscaling/">AWS Auto Scaling</a> integration.</p>
+<p>Other options for load balancing are <a href="http://haproxy.1wt.eu/">HAProxy</a> and <a href="https://www.varnish-cache.org/">Varnish</a>. It’s improper to compare these three options as they each have different purposes. They do all offer some form of load balancing, though.</p>
+<ul>
+<li>If you are already using HAProxy or Varnish, you may not need the AWS ELB.</li>
+<li>If you are using Auto-Scaling you will probably want to start with the AWS ELB.</li>
+<li>If you use the AWS ELB you can still run Varnish or HAProxy behind or in front of your AWS ELB if you need to.</li>
+</ul>
+<h4 id="nginx">Nginx</h4>
+<p><a href="http://wiki.nginx.org/Main">Nginx</a> is a web server and <a href="http://en.wikipedia.org/wiki/Reverse_proxy">reverse proxy</a>. We use it as a web server to serve static files. We use it as a reverse proxy to forward requests to our application server. A partial configuration looks like this:</p>
+<pre><code>server {
+  listen 80;
+  location / {
+    uwsgi_pass 127.0.0.1:3031;         # forward to app
+  }
+  location /static/ {
+    alias /home/ubuntu/myapp/static/;  # serve from disk
+  }
+}</code></pre>
+<h4 id="static-files">Static Files</h4>
+<p>These are resources like Javascript, CSS, favicons and logos.</p>
+<h4 id="python">Python</h4>
+<p><a href="http://www.python.org/">Python</a> is the programming language that was used to build the server-side application. Python generates the dynamic content for the site by reading from the database. Python also handles photo rendering and writes to S3.</p>
+<p>There is a wealth of Python <a href="http://wiki.python.org/moin/WebFrameworks">web development frameworks</a> to choose from.</p>
+<h4 id="uwsgi">uWSGI</h4>
+<p><a href="http://projects.unbit.it/uwsgi/">uWSGI</a> is a <a href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">Web Server Gateway Interface</a> (WSGI) server that allows the web server to talk to the Python application. You may think of uWSGI as “running” the Python application.</p>
+<p>Due to Python’s <a href="http://en.wikipedia.org/wiki/Global_Interpreter_Lock">global interpreter lock</a> you need to start multiple uWSGI processes for an application to support concurrency. Determining how many Python processes to start requires:</p>
+<ul>
+<li>Counting how many CPU cores you have</li>
+<li>Measuring how much RAM your application uses</li>
+<li>Measuring how much RAM you have available</li>
+<li>Counting how many machines you have running application servers</li>
+<li>Testing performance at varying levels of concurrency using load simulators</li>
+</ul>
+<p>I will try to write an article on that process.</p>
+<h4 id="memcached">Memcached</h4>
+<p><a href="http://memcached.org/">Memcached</a> is an in-memory object store. Frequently read objects are written to the cache and read from there instead of from the database. This improves performance and eases load on the database server(s).</p>
+<h4 id="postgresql">PostgreSQL</h4>
+<p><a href="http://www.postgresql.org/">Postgres</a> is a relational database system. Boring, huh? No. Postgres is great. While I’ve loved using <a href="http://redis.io/">Redis</a> on other projects and we evaluated both <a href="http://www.mongodb.org/">MongoDB</a> and <a href="http://cassandra.apache.org/">Cassandra</a>, we ended up choosing Postgres. It was simply better suited to the task. To some it may feel boring if it’s not <a href="https://en.wikipedia.org/wiki/NoSQL">NOSQL</a> but it’s been very nice working with a mature and well documented data store. Here’s an example of what we’re <a href="http://www.postgresql.org/docs/9.2/static/textsearch-intro.html">glad to have</a>.</p>
+<p>If you are new to PostgreSQL you may want to use <a href="http://pgfoundry.org/projects/pgtune/">pgtune</a> to help you get started on a configuration that will optimize performance.</p>
+<h4 id="celery">Celery</h4>
+<p><a href="http://www.celeryproject.org/">Celery</a> is used to run programs that render photos. Photo rendering requests are put into a queue. Celery picks up the requests, renders the photos and clears the queue.</p>
+<h4 id="rabbitmq">RabbitMQ</h4>
+<p><a href="http://www.rabbitmq.com/">RabbitMQ</a> is the message broker we chose as a back end for Celery. I can’t help but quote <a href="https://twitter.com/DEVOPS_BORAT/status/163016374023761920">DevOps Borat</a>:</p>
+<pre><code>If RabbitMQ is answer, you are ask wrong question.</code></pre>
+<p>If you’re new to the asynchronous job &amp; message queue world it may take some time to get things working right but once you get over that hurdle these things work predictably and reliably.</p>
+<h4 id="other-articles-in-the-series">Other Articles in the Series</h4>
+<p><a href="../scoot-servers/">Scoot Architecture Part 1 - Servers</a></p>
+<p>More articles to come…</p>
+  <div id="disqus_thread">
+    <script type="text/javascript">
+      var disqus_shortname = 'workforpizza';
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</div>
+
+  </div>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

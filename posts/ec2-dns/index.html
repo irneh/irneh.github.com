@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+  <title>Work for Pizza</title>
+	<meta name="description" content>
+	<meta name="author" content>
+
+	<!-- Fonts
+  ================================================== -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../../css/skeleton.css">
+	<link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/local.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Atom
+	================================================== -->
+  <link rel="alternate" type="application/atom+xml" href="../../posts.atom" title="Work for Pizza feed">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+
+	<!-- Google Analytics
+	================================================== -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26116441-1']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ </script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+  <div class="container">
+  <div class="ten columns offset-by-three">
+  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <hr />
+</div>
+<div class="ten columns offset-by-three">
+  <h3>EC2 DNS Resolution</h3>
+  <p>April  3, 2013</p>
+  <p>A lot of people starting with EC2 immediately turn to Elastic IPs as the way to route traffic to instances. I did. Here’s how a newcomer would typically set up a database server:</p>
+<pre><code>db.example.com    # your domain's DNS
+|-&gt; 12.34.56.789  # Elastic IP</code></pre>
+<p>That’s typical when you manage DNS <em>and</em> the network but it isn’t optimal when you’re on something like AWS where you don’t manage all of the DNS or all of the network. The method does have its merits (see later) but for most use cases it’s not necessary. It’s also not practically scalable as Amazon prefers to limit you to 5 Elastic IPs. Once you understand how DNS resolves within EC2 you’ll likely find yourself moving away from Elastic IPs. You’ll be happier. You’ll be fine. It’s simple. And you can combine it with DNS from your own domain. Here’s how DNS would resolve to that same database server:</p>
+<pre><code>db.example.com                               # your domain's DNS
+|-&gt; ec2-12-34-56-789.compute-1.amazonaws.com # public AWS DNS
+    |-&gt; 12.34.56.789                         # external IP
+    |-&gt; 10.11.12.13                          # internal IP</code></pre>
+<p>One thing you’re seeing is conditional resolution. If the machine making the call is inside of EC2 DNS will resolve to an IP internal to EC2’s network. If you’re outside you’ll get a publicly reachable IP. Being able to use DNS is always a plus. Being able to use it within EC2 and have entries resolve to internal IPs can have cost and arguably performance benefits. It also makes it much easier to secure services using EC2’s Security Groups. (That’s another subject but you want this.)</p>
+<p>Now imagine a case where your database server dies and you want to point your services to the failover database server. You would simply edit your domain DNS to point to the EC2 instance running the failover server. With a typical TTL of 5 minutes on your DNS entries your apps would be back online relatively quickly (given a “catastrophe” such as losing a database server).</p>
+<p>Having said all that, if you have a small, finite and discrete set of critical services there are ways to reroute traffic from one instance to another that may be better suited to your needs. One is, indeed, re-mapping an EC2 Elastic IP from one instance to another, as could be done with the first configuration. That would likely take effect faster than using the public DNS scheme I suggested (assuming you don’t want to muck with DNS TTLs - yet another subject). But weigh the costs and don’t get hung up on Elastic IPs. You’ll run out of them quickly and they don’t do much for you. Learn and use the EC2 DNS resolution. The flexibility and security benefits are usually well worth it.</p>
+  <div id="disqus_thread">
+    <script type="text/javascript">
+      var disqus_shortname = 'workforpizza';
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</div>
+
+  </div>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

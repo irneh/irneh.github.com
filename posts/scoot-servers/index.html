@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+  <title>Work for Pizza</title>
+	<meta name="description" content>
+	<meta name="author" content>
+
+	<!-- Fonts
+  ================================================== -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../../css/skeleton.css">
+	<link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/local.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Atom
+	================================================== -->
+  <link rel="alternate" type="application/atom+xml" href="../../posts.atom" title="Work for Pizza feed">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+
+	<!-- Google Analytics
+	================================================== -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26116441-1']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ </script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+  <div class="container">
+  <div class="ten columns offset-by-three">
+  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <hr />
+</div>
+<div class="ten columns offset-by-three">
+  <h3>Scoot Architecture Part 1 - Servers</h3>
+  <p>April 12, 2013</p>
+  <p>This is part 1 in a series detailing the systems and application architecture running <a href="http://scoot.io">Scoot</a>. Scoot’s core services are on Amazon Web Services (AWS). This article describes how the Elastic Computing Cloud (EC2) servers are built and configured. This post is one half how we did it and another half how you can do it.</p>
+<h4 id="operating-system">Operating System</h4>
+<p>We wanted an Amazon Machine Image (AMI) that was well tailored for virtualization on EC2, and that limits the choices. We went with Ubuntu 12.04 because of the long term service (LTS), because we are familiar with it and the <a href="http://www.phoronix.com/scan.php?page=article&amp;item=amazon_ec2_nov12&amp;num=1">performance</a> looked good. There’s nothing wrong with the Amazon images. They might even be safer choices from a technical perspective but we chose the familiar.</p>
+<h4 id="topology">Topology</h4>
+<p>Reduced to the most basic elements the topology is a familiar one.</p>
+<div class="figure">
+<img src="../../images/scoot-basic-arch.png" />
+</div>
+<p>Web and application services are scaled out, database services are primarily scaled up. There are many other services in place such as a failover database server and third party services but those will be detailed in a later post. This just illustrates the core.</p>
+<h4 id="builds">Builds</h4>
+<p>Servers are built with <a href="https://help.ubuntu.com/community/CloudInit">Cloud Init</a>, a fancy name for running a script. An example script might look like this:</p>
+<pre><code>#!/bin/bash
+set -e
+
+## SSH authorized keys
+echo ssh-rsa &lt;snip&gt; &gt; /home/ubuntu/.ssh/authorized_keys
+
+## Software installation
+apt-get update
+apt-get install build-essential nginx git unattended-upgrades -y
+
+## More stuff...
+## Clean up...
+
+shutdown -r now</code></pre>
+<p>The scripts are great for a number of reasons, including:</p>
+<ul>
+<li>They serve as readable documentation of how you want the environment to look.</li>
+<li>They can be managed with a version control system.</li>
+<li>They are lightweight and portable. A script for an EC2 image can usually be run on Linode or Rackspace with little to no adjustment.</li>
+</ul>
+<p>Managing server definitions with scripts is easier than managing state with volume snapshots/images. We take volume snapshots into Elastic Block Store (EBS) but that is in order to speed auto-scaling, not to preserve server state.</p>
+<h4 id="configuration-management">Configuration Management</h4>
+<p>If you have a large installation there are benefits to using a configuration management tool. The downside is that you may spend a lot of time choosing between <a href="http://www.opscode.com/chef/">Chef</a> and <a href="https://puppetlabs.com/">Puppet</a>. To me that feels like not knowing much about photography and trying to choose between Canon and Nikon. You’ll think you’re making an educated decision but in the end you’ll realize the things you thought mattered don’t. Personally, I like the third horse, <a href="http://docs.saltstack.com/">Salt</a>. I also use <a href="http://ansible.cc/">Ansible</a> a good deal. Learning Ansible is a safe investment as it can be used in conjuction with one of the other three.</p>
+<h4 id="security">Security</h4>
+<p>If you can manage a Virtual Private Cloud (VPC), do. A VPC takes machines that don’t need to be on the Internet off the Internet. Your database server doesn’t need to be on the Internet. Configuring a VPC is well documented. If a VPC is too much to manage here are basic guidelines to make use of EC2’s Security Groups:</p>
+<ul>
+<li>Make one security group for each role within your environment - one for database servers, one for web servers, one for load balancers, etc.</li>
+<li>Configure your groups to allow traffic only from the appropriate groups. For example, don’t let your database talk to your web servers and don’t let your load balancer talk to your database.</li>
+<li>Let the Internet (0.0.0.0/0) talk to your load balancer.</li>
+<li>Don’t let the Internet talk to your web servers or your database.</li>
+<li>Don’t let the Internet SSH/RDP to your instances. Whitelist your remoting. Need to work from home on a startup? Figure out your home IP and allow that. Nothing more.</li>
+</ul>
+<p>Do not get comfy here. Do not trade too much security for convenience.</p>
+<h4 id="security-bis">Security, bis</h4>
+<p>I like to use the unattended-upgrades package to install <a href="https://help.ubuntu.com/community/AutomaticSecurityUpdates">automatic security updates</a>. This favors security over application stability. Do it this way until it bites you too many times.</p>
+<p>If you use Ubuntu subscribe to the <a href="https://lists.ubuntu.com/mailman/listinfo/ubuntu-security-announce">security announcements mailing list</a>. If you use another distribution, subscribe to their mailing list(s).</p>
+<p>Patch your kernel and reboot when security fixes become available. <a href="http://podgorny.cz/moin/Uptimed">Uprecords</a> are fun but safe is better than sorry.</p>
+<h4 id="other-articles-in-the-series">Other Articles in the Series</h4>
+<p><a href="../scoot-stack/">Scoot Architecture Part 2 - Application Stack</a></p>
+  <div id="disqus_thread">
+    <script type="text/javascript">
+      var disqus_shortname = 'workforpizza';
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</div>
+
+  </div>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

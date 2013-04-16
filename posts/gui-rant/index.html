@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+  <title>Work for Pizza</title>
+	<meta name="description" content>
+	<meta name="author" content>
+
+	<!-- Fonts
+  ================================================== -->
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet" type="text/css">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../../css/skeleton.css">
+	<link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/local.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Atom
+	================================================== -->
+  <link rel="alternate" type="application/atom+xml" href="../../posts.atom" title="Work for Pizza feed">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link rel="apple-touch-icon" href="../../images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+
+	<!-- Google Analytics
+	================================================== -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26116441-1']);
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ </script>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+  <div class="container">
+  <div class="ten columns offset-by-three">
+  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <hr />
+</div>
+<div class="ten columns offset-by-three">
+  <h3>A Quick Rant about GUIs</h3>
+  <p>December  4, 2012</p>
+  <p>I got this email from my gal today:</p>
+<pre><code>I find it amusing that you prefer to do things command line. Then I get to work
+and hear devs talking about how Azure is awesome because it has an easy to use
+GUI and you don't have to do things command line.</code></pre>
+<p>It takes less than that to get me going! :)</p>
+<p>GUIs are good for <strong>discovery</strong>. They are good when you don’t know what you are doing or don’t know what to do it with. I know from personal experience. In the mid-nineties I set up an email server (Exchange) for my family business. I’d never heard of <a href="http://en.wikipedia.org/wiki/E-mail_agent_(infrastructure)">mail agents</a> or any such thing. I just popped in the Microsoft Small Business Server CD (note: not a DVD) and clicked “Install.” When it was done, not knowing what to do, I just clicked on the “Start” menu and found the new entries. Before long I found myself in an Exchange console and kept on clicking around, opening panes and dialogs and sub-dialogs and so forth. After a lot of trial and error I got email working, inbound and eventually outbound. I didn’t know what I’d done or or if I’d done it correctly. But there was an effect; something was happening. To be clear, I didn’t know what I’d needed to do or what I was trying to build but with persistence I found my way to an end.</p>
+<p>Interlude: Who doesn’t love the <a href="http://www.postfix.org/">Postfix</a> mascott?</p>
+<div class="figure">
+<img src="../../images/postfix-logo.gif" />
+</div>
+<p>I’ve used Postfix without problem for years so please do.</p>
+<p>Oh. But where was I? Ah, yes. I’ve managed MSSQL systems for ~15 years. I’ve also managed MySQL and PostgreSQL systems. Managing database servers with a GUI, whether it’s with SSMS or pgAdmin, involves a lot of interaction with a pane on the left that’s essentially an iFrame. Getting, say, a list of tables can be a hassle when you do it all day long. Just ask your DBA to show you how it’s done in the GUI. It’s slow and tedious. On the other hand, doing the same thing against MySQL from the command line is a lot simpler:</p>
+<pre><code>SHOW TABLES;</code></pre>
+<p>You just type that and hit ENTER. That’s fewer keystrokes than GUI mouse-clicks and I can do them with my eyes closed. With PostgreSQL they made it, well, simpler still:</p>
+<pre><code>\dt</code></pre>
+<p>Yes. That’s it. That “\dt” means DESCRIBE TABLES. Since I know <em>what</em> I need to do and <em>how</em> to do it I’ll take</p>
+<pre><code>\dt</code></pre>
+<p>over playing point-and-click/click-and-drag/whack-a-mole with the GUI.</p>
+<p>To be fair, and go on a tangent, I got into SQL not in school but thanks to MS Access. I created much with its graphical designer. But before long I needed more of its SQL engine; things that weren’t presented or weren’t possible in the GUI. But things it could indeed do. The GUI got me started. It was there to help me <strong>discover</strong>. Regarding going past what the GUI can do, I’ll just leave you with <a href="http://danwin.com/2012/08/wysiayg-all/">What You See Is All You Get</a>.</p>
+<p>…</p>
+<p>PS. Wasn’t this supposed to be about command line interactions? I got off-track. Unfortunately for you I just woke up and we are continuing:</p>
+<pre><code>ifconfig</code></pre>
+<p>Now please use your Windows/Mac/Boobuntu GUI to show me the IP and MAC addresses for each of your network interfaces, along with their MTUs. Unfair example? Sorry. It’s just the first that comes to mind.</p>
+<pre><code>SQL, Lisp, and Haskell are the only programming languages that I've seen where
+one spends more time thinking than typing.
+  - Philip Greenspun</code></pre>
+<p>I think the command line is similar. You need to know what you’re doing before you begin composing. There is no “undo” at the command line.</p>
+<pre><code>sleep 14400</code></pre>
+  <div id="disqus_thread">
+    <script type="text/javascript">
+      var disqus_shortname = 'workforpizza';
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+       })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</div>
+
+  </div>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
