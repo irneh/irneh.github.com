@@ -68,7 +68,7 @@
   <p>April 17, 2013</p>
   <p>I was off on the ’net looking for utilities to help me combine JS files, CSS files, etc. And hey, maybe something that would integrate with a build system? I must have spent more than 15 minutes, straying off into YUI Compressors and such, before realizing what an idiot I was. I already had everything I needed.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> x.js y.js z.js <span class="kw">&gt;</span> combined.js</code></pre>
-<p>I wonder why we sometimes forget our basic tools and think we need something big.</p>
+<p>I wonder why we sometimes forget our basic tools and think we need something big. Here’s a way to add comments to a multi-line concatenation:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
 <span class="kw">cat</span> base.css      <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
     <span class="kw">skeleton.css</span> <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
