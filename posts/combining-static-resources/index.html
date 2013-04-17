@@ -66,9 +66,9 @@
 <div class="ten columns offset-by-three">
   <h3>Combining Static Resources</h3>
   <p>April 17, 2013</p>
-  <p>A few months ago I was performance tuning a site. I’d manually combined the Javascript files into one and concluded from testing that the browser collected the resources faster (your mileage may vary). So I went off on the web looking for utilities to help me combine JS files, CSS files, etc. And why not something that would integrate with a build system, too? I must have spent more than 15 minutes, straying off into YUI Compressors and such, before realizing what an idiot I was. Everything I needed, and it wasn’t much, was right there under my feet.</p>
+  <p>I was off on the ’net looking for utilities to help me combine JS files, CSS files, etc. And hey, maybe something that would integrate with a build system? I must have spent more than 15 minutes, straying off into YUI Compressors and such, before realizing what an idiot I was. I already had everything I needed.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> x.js y.js z.js <span class="kw">&gt;</span> combined.js</code></pre>
-<p>If you are looking for a way to concatenate your your static resources, you already know how. If you want to decorate a script with comments here’s one way:</p>
+<p>I wonder why we sometimes forget our basic tools and think we need something big.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
 <span class="kw">cat</span> base.css      <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
     <span class="kw">skeleton.css</span> <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
@@ -76,7 +76,7 @@
     <span class="kw">syntax.css</span>   <span class="kw">`:</span> Pandoc<span class="kw">`</span> \
     <span class="kw">local.css</span>    <span class="kw">`:</span> Henri<span class="kw">`</span> \
   <span class="kw">&gt;</span> <span class="kw">../combined.css</span></code></pre>
-<p>And of course it integrates with a build system. What could be simpler?</p>
+<p>And of course it integrates with a build system.</p>
   <div id="disqus_thread">
     <script type="text/javascript">
       var disqus_shortname = 'workforpizza';
