@@ -64,19 +64,28 @@
   <hr />
 </div>
 <div class="ten columns offset-by-three">
-  <h3>Combining Static Resources</h3>
-  <p>April 17, 2013</p>
-  <p>I was off on the ’net looking for utilities to help me combine JS files, CSS files, etc. And hey, maybe something that would integrate with a build system? I must have spent more than 15 minutes, straying off into YUI Compressors and such, before realizing what an idiot I was. I already had everything I needed.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> x.js y.js z.js <span class="kw">&gt;</span> combined.js</code></pre>
-<p>I wonder why we sometimes forget our basic tools and think we need something big. Here’s a way to add comments to a multi-line concatenation:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
-<span class="kw">cat</span> base.css    <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
-    <span class="kw">skeleton.css</span> <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
-    <span class="kw">layout.css</span>   <span class="kw">`:</span> Skeleton<span class="kw">`</span> \
-    <span class="kw">syntax.css</span>   <span class="kw">`:</span> Pandoc<span class="kw">`</span> \
-    <span class="kw">local.css</span>    <span class="kw">`:</span> Henri<span class="kw">`</span> \
-  <span class="kw">&gt;</span> <span class="kw">../combined.css</span></code></pre>
-<p>And of course it integrates with a build system.</p>
+  <h3>Shooting for Black and White</h3>
+  <p>April 26, 2013</p>
+  <p>The other day I made the mistake of reading the Wikipedia page on <a href="https://en.wikipedia.org/wiki/Ansel_Adams">Ansel Adams</a>. Now think all my photos stink. If you’ve done any form of photography long enough the following graph will be a familiar one.</p>
+<div class="figure">
+<img src="../../images/bw-xkcd.png" />
+</div>
+<p>The more you learn the easier it is to look back at what you’ve done and see the flaws, either in composition or technical execution. In a complex domain like photography there are a lot of ways to muck things up. And the more pieces you add to the puzzle the more dangerous you become.</p>
+<h4 id="simplifying-the-game">Simplifying the Game</h4>
+<p>Years back I had a conversation with an artist friend of mine (MFA, if that matters). I asked him about the process of composition in black and white vs. color. He said:</p>
+<blockquote>
+<p>It’s hard enough to get it right in black and white. Add color to the mix and all bets are off.</p>
+</blockquote>
+<p>I was reminded of that when I read the wiki on Ansel Adams, which stated:</p>
+<blockquote>
+<p>He felt color could be distracting, and could therefore divert an artist’s attention away from achieving his full potential when taking a photograph.</p>
+</blockquote>
+<p>Me, I’m just back from a Utah hiking trip and have finished looking through my snapshots. They are weaker than I’d hoped. Sure, we there for hiking and not photography, per se. And taking shots into the sun on overcast days at high noon isn’t what a pro would be doing, but still. Yes, some photos tell the story of what we were doing. Others are fairly pretty. But there really wasn’t much to them. And many were entirely forgettable.</p>
+<p>But I happened to see something in one of them and removed the color. Here’s the result:</p>
+<p><a href="../../images/bw-negro-bill.jpg"><img src="../../images/bw-negro-bill-small.jpg" /></a></p>
+<p>It’s not art. It’s not fine photography. But it’s something that wasn’t there when it was in color, which is interesting.</p>
+<p>While I’m probably drawing the wrong conclusions it will be a fun exercise to “think in black and white.” If I can do a better job of getting the core pieces into the shots maybe I’ll some day try to bring color back into the mix.</p>
+<p>PS. The shot was taken in <a href="https://scoot.io/go/2121">Negro Bill Canyon</a>.</p>
   <div id="disqus_thread">
     <script type="text/javascript">
       var disqus_shortname = 'workforpizza';
