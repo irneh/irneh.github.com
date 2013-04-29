@@ -66,7 +66,7 @@
 <div class="ten columns offset-by-three">
   <h3>Scoot Architecture Part 1 - Servers</h3>
   <p>April 12, 2013</p>
-  <p>This is part 1 in a series detailing the systems and application architecture running <a href="http://scoot.io">Scoot</a>. Scoot’s core services are on Amazon Web Services (AWS). This article describes how the Elastic Computing Cloud (EC2) servers are built and configured. This post is one half how we did it and another half how you can do it.</p>
+  <p>This is part 1 in a series detailing the systems and application architecture running <a href="http://scoot.io">Scoot</a>. The core services are on Amazon Web Services (AWS). This article describes how the Elastic Computing Cloud (EC2) servers are built and configured.</p>
 <h4 id="operating-system">Operating System</h4>
 <p>We wanted an Amazon Machine Image (AMI) that was well tailored for virtualization on EC2, and that limits the choices. We went with Ubuntu 12.04 because of the long term service (LTS), because we are familiar with it and the <a href="http://www.phoronix.com/scan.php?page=article&amp;item=amazon_ec2_nov12&amp;num=1">performance</a> looked good. There’s nothing wrong with the Amazon images. They might even be safer choices from a technical perspective but we chose the familiar.</p>
 <h4 id="topology">Topology</h4>
