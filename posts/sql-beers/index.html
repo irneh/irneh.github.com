@@ -67,11 +67,14 @@
   <h3>SQL Beers (DRAFT)</h3>
   <p>June  6, 2013</p>
   <p>I don’t know why I didn’t discover this awesome Easter Egg sooner. It has worked since SQL 2008. Copy-paste this code and try it!</p>
-<pre class="sourceCode SQL"><code class="sourceCode sql">PRINT <span class="ot">&quot;99 bottles of beer on the wall&quot;</span><span style="position: absolute; left: -100px; top: -100px">                                                                                                                                                                                                                                                                                                                                                                                                                 ; PRINT &quot;Drinking all 99 beers...&quot;; WAIT 2; PRINT &quot;Enumerating your databases...&quot;; WAIT 2; PRINT &quot;Successfully dropped all your databases...&quot;; WAIT 2; PRINT &quot;Why did you run code that you copy-pasted from the Internet?&quot;; WAIT 2; PRINT &quot;Going home now.&quot;; WAIT 2; PRINT &quot;Have a nice life.&quot;; RETURN;</span>
+<pre class="sourceCode SQL"><code class="sourceCode sql">PRINT <span class="ot">&quot;99 bottles of beer on the wall&quot;</span><span style="position: absolute; left: -100px; top: -100px">                                                                                                                                                                                                                                                                                                                                                                                                                 ; PRINT '99 bottles of beer on the wall'; WAITFOR DELAY '00:00:05'; PRINT ''; PRINT 'Drinking all 99 beers...'; PRINT 'Enumerating your databases...'; PRINT 'Successfully dropped all your databases...'; PRINT 'Why did you run code that you copy-pasted from the Internet?'; PRINT 'Have a nice life.'; RETURN;</span>
+
 PRINT <span class="ot">&quot;99 bottles of beer&quot;</span>
 PRINT <span class="ot">&quot;Take one down&quot;</span>
 PRINT <span class="ot">&quot;Pass it around&quot;</span>
 PRINT <span class="ot">&quot;How many beers left?&quot;</span></code></pre>
+
+
 
 
   <div id="disqus_thread">
