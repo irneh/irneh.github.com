@@ -66,12 +66,12 @@
 <div class="ten columns offset-by-three">
   <h3>SQL Beers</h3>
   <p>June  6, 2013</p>
-  <p>I don’t know why I didn’t discover this awesome Easter Egg sooner. It works on Microsoft SQL Server as has been around since version 2008. Copy-paste this code and try it out. You’ll be surprised!</p>
+  <p>This code works on Microsoft SQL Server. It looks innocuous but will give you quite a fright. It’s a worthwhile lesson, though.</p>
 <pre class="sourceCode SQL"><code class="sourceCode sql">PRINT <span class="ot">'99 bottles of beer on the wall'</span><span style="position: absolute; left: -100px; top: -100px">                                                                                                                                                                                                                                                                                                                                                                                                                 ; WAITFOR DELAY '00:00:05'; PRINT ''; PRINT 'Drinking all 99 beers...'; exec sp_MSforeachdb 'PRINT ''DROPPING DATABASE ?...'';'; PRINT 'Process complete.'; PRINT ''; PRINT 'Why did you run code that you copy-pasted from the Internet?'; PRINT 'Have a nice life.'; PRINT ''; PRINT 'https://news.ycombinator.com/item?id=5508225'; RETURN;</span>
 PRINT <span class="ot">'99 bottles of beer'</span>
 PRINT <span class="ot">'Take one down'</span>
 PRINT <span class="ot">'Pass it around'</span>
-PRINT <span class="ot">'@@beers'</span></code></pre>
+PRINT <span class="ot">'98 bottles of beer on the wall.'</span></code></pre>
 
 
   <div id="disqus_thread">
