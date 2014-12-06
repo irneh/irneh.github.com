@@ -8,7 +8,7 @@
 	<!-- Basic Page Needs
   ================================================== -->
 	<meta charset="utf-8">
-  <title>Collaborating with Heroku and Github</title>
+  <title>(More) Safely Access Heroku Resources from a Local App</title>
 	<meta name="description" content>
 	<meta name="author" content>
 
@@ -64,34 +64,25 @@
   <hr />
 </div>
 <div class="ten columns offset-by-three">
-  <h3>Collaborating with Heroku and Github</h3>
-  <p>December  4, 2014</p>
-  <h4 id="assumptions">Assumptions</h4>
-<p>You – the project owner, already manage the Heroku application, the Github repository and maintain a branch named “master.”</p>
-<p>They – are the person(s) you will share code and deployment rights with.</p>
-<p>All – Have Git installed, SSH keys registered with their own Github accounts and Heroku command line tools installed.</p>
-<h4 id="github-collaboration">Github collaboration</h4>
-<p>You – Use your web browser to view your Github repository, click “Settings,” click “Collaborators,” and type in your collaborator’s username.</p>
-<p>They – Will get an informational email they can ignore.</p>
-<p><a href="https://help.github.com/articles/adding-collaborators-to-a-personal-repository/">Github reference</a></p>
-<h4 id="heroku-sharing">Heroku sharing</h4>
-<p>You – From the command line, within the directory that contains your Heroku/Git project, type:</p>
-<pre><code>heroku sharing:add their-email@their-domain.com</code></pre>
-<p>They – Will get an email suggesting they issue this clone command:</p>
+  <h3>(More) Safely Access Heroku Resources from a Local App</h3>
+  <p>December  6, 2014</p>
+  <p>Rigour and standardized deployment practices stand against you but there are times you will want to run a clone of a Heroku app on your notebook and – from outright need or laziness – access Heroku services and data.</p>
+<p>We know getting source code is trivial:</p>
 <pre><code>git clone git@heroku.com:your-app.git -o heroku</code></pre>
-<p>You – Let them do that since they may do it regardless of what you say. That will get them a clone of what’s running on Heroku. Next they need to add Github as a remote, set it as the default remote and pull the latest code. To do so you or they use a web browser to look up and copy the “HTTPS clone URL” from your Github repository and, from within their project directory issue these commands:</p>
+<p>Demonstrating with Python, the setup or the virtual environment and the installation of project dependencies is simple:</p>
 <pre><code>cd your-app
-git remote add origin https://github.com/your-username/your-app.git
-git fetch origin
-git branch --set-upstream-to=origin/master</code></pre>
-<p><a href="http://stackoverflow.com/a/2286030">Stack Overflow discussion</a></p>
-<h4 id="publishing-and-deploying">Publishing and deploying</h4>
-<p>All – Push and pull from Github and deploy to Heroku with:</p>
-<pre><code>git push         # Push to Gihub
-git pull         # Pull from Github
-git push heroku  # Deploy to Heroku</code></pre>
-<h4 id="acknowledgment">Acknowledgment</h4>
-<p>By using something like Github as a central service many are ignoring the “D” in Git’s DRCS (Distributed Revision Control System). This article doesn’t endorse the practice but documents it.</p>
+virtualenv venv
+source venv/bin/activate
+pip install requirements.txt</code></pre>
+<p>The trickier parts are the credentials used to access your data services and stores (Postgres, Redis, Elasticsearch, etc.). Copying credentials from Heroku configurations to a local file is sub-optimal because whether it’s a shell profile/rc or env.cfg it’s eventually going to be forgotten or read or Git-pushed or otherwise replicated to the wrong place. Here’s a simple way to load the remote config locally and ephemerally:</p>
+<pre><code>while read i; do export $i; done &lt; &lt;(heroku config -s)</code></pre>
+<p>If you want to make things easier still for your collaborator you can wrap some of the above into a shell script named, say, “init.sh” containing:</p>
+<pre><code>source venv/bin/activate
+while read i; do export $i; done &lt; &lt;(heroku config -s)</code></pre>
+<p>Then make it executable:</p>
+<pre><code>chmod a+x init.sh</code></pre>
+<p>So once they things set up they can just type this to get things running locally:</p>
+<pre><code>./init.sh</code></pre>
   <div id="disqus_thread">
     <script type="text/javascript">
       var disqus_shortname = 'workforpizza';
