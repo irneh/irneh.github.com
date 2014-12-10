@@ -23,7 +23,10 @@
 
 	<!-- CSS
   ================================================== -->
-  <link rel="stylesheet" href="../../css/combined.css">
+  <link rel="stylesheet" href="../../css/normalize.css">
+  <link rel="stylesheet" href="../../css/skeleton.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+  <link rel="stylesheet" href="../../css/local.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,14 +62,18 @@
 	<!-- Primary Page Layout
 	================================================== -->
   <div class="container">
-  <div class="ten columns offset-by-three">
-  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <div class="twelve columns">
+  <h1 style="margin-top: 40px; text-align: center"><a class="homelink" href="../../">Work for Pizza</a></h1>
   <hr />
 </div>
-<div class="ten columns offset-by-three">
-  <h3>Scoot Architecture Part 2 - Application Stack</h3>
-  <p>April 16, 2013</p>
-  <p>This is part 2 in a series detailing the systems and application architecture running <a href="http://scoot.io">Scoot</a>. The core services are on Amazon Web Services (AWS). This article is an overview of the application stack.</p>
+<div class="row">
+  <div class="two columns">
+>
+  </div>
+  <div class="eight columns">
+    <h3>Scoot Architecture Part 2 - Application Stack</h3>
+    <p>April 16, 2013</p>
+      <p>This is part 2 in a series detailing the systems and application architecture running <a href="http://scoot.io">Scoot</a>. The core services are on Amazon Web Services (AWS). This article is an overview of the application stack.</p>
 <h4 id="topology-with-generics">Topology, with Generics</h4>
 <p>Here is a topology that shows functional components without software specifics. Control and data flow should make some level of sense.</p>
 <p><a href="../../images/scoot-stack.png"><img src="../../images/scoot-stack-small.png" /></a></p>
@@ -129,16 +136,6 @@
 <h4 id="other-articles-in-the-series">Other Articles in the Series</h4>
 <p><a href="../scoot-servers/">Scoot Architecture Part 1 - Servers</a></p>
 <p>More articles to come…</p>
-  <div id="disqus_thread">
-    <script type="text/javascript">
-      var disqus_shortname = 'workforpizza';
-      (function() {
-       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-       })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </div>
 

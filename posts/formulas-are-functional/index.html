@@ -23,7 +23,10 @@
 
 	<!-- CSS
   ================================================== -->
-  <link rel="stylesheet" href="../../css/combined.css">
+  <link rel="stylesheet" href="../../css/normalize.css">
+  <link rel="stylesheet" href="../../css/skeleton.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+  <link rel="stylesheet" href="../../css/local.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,14 +62,18 @@
 	<!-- Primary Page Layout
 	================================================== -->
   <div class="container">
-  <div class="ten columns offset-by-three">
-  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <div class="twelve columns">
+  <h1 style="margin-top: 40px; text-align: center"><a class="homelink" href="../../">Work for Pizza</a></h1>
   <hr />
 </div>
-<div class="ten columns offset-by-three">
-  <h3>Macros are Imperative. Formulas are Functional.</h3>
-  <p>April  8, 2013</p>
-  <p>For years I’ve been preaching the virtues of functional programming to my friends and, well, just about anyone who would listen. They’ve indulged me but needless to say I don’t have many converts. Recently I read a great article titled <a href="http://blog.jcoglan.com/2013/03/30/callbacks-are-imperative-promises-are-functional-nodes-biggest-missed-opportunity/">Callbacks are imperative, promises are functional</a>. It does a good job of bringing a little bit of that functional world to the imperative programmer. In the article the author states that if you’ve used Excel you’ve done functional programming. It was a minor point but I loved the analogy. I’m going to expand it and also state that Excel development can actually be a mix of functional and imperative styles.</p>
+<div class="row">
+  <div class="two columns">
+>
+  </div>
+  <div class="eight columns">
+    <h3>Macros are Imperative. Formulas are Functional.</h3>
+    <p>April  8, 2013</p>
+      <p>For years I’ve been preaching the virtues of functional programming to my friends and, well, just about anyone who would listen. They’ve indulged me but needless to say I don’t have many converts. Recently I read a great article titled <a href="http://blog.jcoglan.com/2013/03/30/callbacks-are-imperative-promises-are-functional-nodes-biggest-missed-opportunity/">Callbacks are imperative, promises are functional</a>. It does a good job of bringing a little bit of that functional world to the imperative programmer. In the article the author states that if you’ve used Excel you’ve done functional programming. It was a minor point but I loved the analogy. I’m going to expand it and also state that Excel development can actually be a mix of functional and imperative styles.</p>
 <h4 id="the-imperative-piece">The Imperative Piece</h4>
 <p>Excel has support for macros. An Excel macro is code that runs essentially top to bottom performing a series of operations. You tell the computer what to do, when, in what order. Your code interacts with things outside itself. It may read or set cells values, read or write to a file or database or in some other way change state. Each time you run your code the result may be different. You probably expect it to be. You may be incrementing things, for example, or importing data from an updated file. This is the imperative piece - a series of steps, top to bottom, getting, setting and a potentially or expectedly different result each time.</p>
 <h4 id="the-functional-piece">The Functional Piece</h4>
@@ -78,16 +85,6 @@
 <li><p>Developing in Excel you often put a formula into, say, cell A10. Then you go to cell, say, A11 and put in a formula that refers to A10. And so forth and so on. You know that if you got the formula in A10 right all you need to worry about in A11 is A11. You don’t need to worry about what’s happening in some other part of your code base. At the end you chain these small, reliable pieces together to build bigger things. This is function composition!</p></li>
 </ul>
 <p>Functional programming has a lot of advantages. It’s an awful lot of fun and may not be as foreign as you think. So, please, go forth and <a href="http://learnyouahaskell.com/">Learn you a Haskell</a>! It’s awesome.</p>
-  <div id="disqus_thread">
-    <script type="text/javascript">
-      var disqus_shortname = 'workforpizza';
-      (function() {
-       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-       })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </div>
 

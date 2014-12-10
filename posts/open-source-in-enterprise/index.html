@@ -23,7 +23,10 @@
 
 	<!-- CSS
   ================================================== -->
-  <link rel="stylesheet" href="../../css/combined.css">
+  <link rel="stylesheet" href="../../css/normalize.css">
+  <link rel="stylesheet" href="../../css/skeleton.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+  <link rel="stylesheet" href="../../css/local.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,14 +62,18 @@
 	<!-- Primary Page Layout
 	================================================== -->
   <div class="container">
-  <div class="ten columns offset-by-three">
-  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <div class="twelve columns">
+  <h1 style="margin-top: 40px; text-align: center"><a class="homelink" href="../../">Work for Pizza</a></h1>
   <hr />
 </div>
-<div class="ten columns offset-by-three">
-  <h3>Open Source in Enterprise</h3>
-  <p>May  9, 2013</p>
-  <p>In contrast to Gartner numbers published by <a href="http://news.cnet.com/8301-1001_3-10098624-92.html">CNET</a> (2008) and the <a href="http://blogs.hbr.org/cs/2011/03/open_source_software_hits_a_st.html">Harvard Business Review</a> (2011) my experience has been that most enterprise shops - mid-sized business and government - have an aversion to open source software, especially the free kind.</p>
+<div class="row">
+  <div class="two columns">
+>
+  </div>
+  <div class="eight columns">
+    <h3>Open Source in Enterprise</h3>
+    <p>May  9, 2013</p>
+      <p>In contrast to Gartner numbers published by <a href="http://news.cnet.com/8301-1001_3-10098624-92.html">CNET</a> (2008) and the <a href="http://blogs.hbr.org/cs/2011/03/open_source_software_hits_a_st.html">Harvard Business Review</a> (2011) my experience has been that most enterprise shops - mid-sized business and government - have an aversion to open source software, especially the free kind.</p>
 <p>It’s probably the region I work in and it’s often <a href="http://en.wikipedia.org/wiki/Fear,_uncertainty_and_doubt">FUD</a> - “Who’ll support it if it breaks? It’s less secure because people can read the code. How do I know it’s not sending my data to another country?” When people I work with say this, for fun, I challenge them. I’ve asked for copies of governance or procurement policies that mandate closed source solutions but have never seen them. “Trust me,” they say, “That might work for Twitter but we have [insert acronym] data.”</p>
 <p>I think this behavior is a teeny-bit rooted in fanboi-ism but primarily in the intrinsic need to justify choices made and, well, an employee’s general existence. If a Windows admin hears of Linux the reaction is often defensive. Tell a BSD admin that Windows is needed for something and the reaction may be worse. This behavior is strongest in management since being seen as having made the wrong choice or supported the wrong camp can lead to termination.</p>
 <h4 id="javascript">Javascript</h4>
@@ -74,16 +81,6 @@
 <p>Your database may be Oracle on Sun but you’re sending all that data over the wire to an application running open source software. “Worse” yet is that your devs may be linking to public CDNs like Google’s. Now your [insert acronym] data is being processed by open source code that is served by a third party!</p>
 <p>While the FUD is greatest within operations teams and their management it’s less so within development teams - the ones who are either unwittingly or eagerly bringing this stuff in. Accidental or not I think this move toward using open source projects will continue and organizations will be better off in the end, once they figure things out. I can hear a dam bursting nearby.</p>
 <p>PS. See a discussion of this <a href="http://www.reddit.com/r/programming/comments/1e2od7/open_source_in_enterprise_whats_it_like_for_you/">on Reddit</a>.</p>
-  <div id="disqus_thread">
-    <script type="text/javascript">
-      var disqus_shortname = 'workforpizza';
-      (function() {
-       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-       })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </div>
 

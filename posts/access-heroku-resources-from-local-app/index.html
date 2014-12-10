@@ -23,7 +23,10 @@
 
 	<!-- CSS
   ================================================== -->
-  <link rel="stylesheet" href="../../css/combined.css">
+  <link rel="stylesheet" href="../../css/normalize.css">
+  <link rel="stylesheet" href="../../css/skeleton.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+  <link rel="stylesheet" href="../../css/local.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,14 +62,18 @@
 	<!-- Primary Page Layout
 	================================================== -->
   <div class="container">
-  <div class="ten columns offset-by-three">
-  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <div class="twelve columns">
+  <h1 style="margin-top: 40px; text-align: center"><a class="homelink" href="../../">Work for Pizza</a></h1>
   <hr />
 </div>
-<div class="ten columns offset-by-three">
-  <h3>Access Heroku Resources from a Local App</h3>
-  <p>December  6, 2014</p>
-  <p>Rigour and standardized deployment practices stand against you but there are times you will run a clone of a Heroku app on your notebook and – from outright need or laziness – access primary Heroku/Amazon/etc. services and data.</p>
+<div class="row">
+  <div class="two columns">
+>
+  </div>
+  <div class="eight columns">
+    <h3>Access Heroku Resources from a Local App</h3>
+    <p>December  6, 2014</p>
+      <p>Rigour and standardized deployment practices stand against you but there are times you will run a clone of a Heroku app on your notebook and – from outright need or laziness – access primary Heroku/Amazon/etc. services and data.</p>
 <p>We know getting source code is trivial:</p>
 <pre><code>git clone git@heroku.com:your-app.git -o heroku</code></pre>
 <p>Demonstrating with Python, the setup or the virtual environment and the installation of project dependencies is simple:</p>
@@ -83,16 +90,6 @@ while read i; do export $i; done &lt; &lt;(heroku config -s)</code></pre>
 <pre><code>chmod a+x init.sh</code></pre>
 <p>And once the initial installation is done they can always start from a fresh terminal and simply do:</p>
 <pre><code>./init.sh</code></pre>
-  <div id="disqus_thread">
-    <script type="text/javascript">
-      var disqus_shortname = 'workforpizza';
-      (function() {
-       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-       })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </div>
 

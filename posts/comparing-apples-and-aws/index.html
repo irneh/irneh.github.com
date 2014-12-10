@@ -23,7 +23,10 @@
 
 	<!-- CSS
   ================================================== -->
-  <link rel="stylesheet" href="../../css/combined.css">
+  <link rel="stylesheet" href="../../css/normalize.css">
+  <link rel="stylesheet" href="../../css/skeleton.css">
+  <link rel="stylesheet" href="../../css/syntax.css">
+  <link rel="stylesheet" href="../../css/local.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,14 +62,18 @@
 	<!-- Primary Page Layout
 	================================================== -->
   <div class="container">
-  <div class="ten columns offset-by-three">
-  <h1 style="margin-top: 40px"><a class="homelink" href="../../">Work for Pizza</a></h1>
+  <div class="twelve columns">
+  <h1 style="margin-top: 40px; text-align: center"><a class="homelink" href="../../">Work for Pizza</a></h1>
   <hr />
 </div>
-<div class="ten columns offset-by-three">
-  <h3>Comparing Apples and Amazon Web Services</h3>
-  <p>April  4, 2013</p>
-  <p>Many do “how low can you go?” comparisons. So let’s follow in their footsteps and not think about what we’re doing until later. If you’re on Amazon Web Services (AWS) using Elastic Computing Cloud (EC2) then you know their smallest offering is a t1.micro that isn’t suitable for benchmarking. The next smallest offering is an m1.small. That can be had for ~$25-$40/month. Let’s compare the performance of one of those against the $20/month Linode offering and the $5/month Digital Ocean (DO) offering. Running UnixBench we get the following results, averaged, with standard deviation (STDEV), from 4 samples over 50 days.</p>
+<div class="row">
+  <div class="two columns">
+>
+  </div>
+  <div class="eight columns">
+    <h3>Comparing Apples and Amazon Web Services</h3>
+    <p>April  4, 2013</p>
+      <p>Many do “how low can you go?” comparisons. So let’s follow in their footsteps and not think about what we’re doing until later. If you’re on Amazon Web Services (AWS) using Elastic Computing Cloud (EC2) then you know their smallest offering is a t1.micro that isn’t suitable for benchmarking. The next smallest offering is an m1.small. That can be had for ~$25-$40/month. Let’s compare the performance of one of those against the $20/month Linode offering and the $5/month Digital Ocean (DO) offering. Running UnixBench we get the following results, averaged, with standard deviation (STDEV), from 4 samples over 50 days.</p>
 <pre><code># CPU (STDEV)
 EC2:     182 (23%)
 Linode: 2242 (20%)
@@ -140,16 +147,6 @@ DO:      20</code></pre>
 <p>A few days after this post Linode doubled the RAM in their $20/month plan. That’s now reflected above. I’m making pizza again today and the dough is rising in a smilarly competive fashion:</p>
 <p><a href="../../images/pizza-dough-before.jpg"><img src="../../images/pizza-dough-before-small.jpg" /></a></p>
 <p><a href="../../images/pizza-dough-after.jpg"><img src="../../images/pizza-dough-after-small.jpg" /></a></p>
-  <div id="disqus_thread">
-    <script type="text/javascript">
-      var disqus_shortname = 'workforpizza';
-      (function() {
-       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-       })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </div>
 
